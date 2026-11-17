@@ -1,12 +1,12 @@
 const express = require('express');
 const userModel = require('../models/userModel');
-const Database = require('better-sqlite3');
+const db = require('../models/database');
 
 const auth = express.Router();
 
 auth.get('/register', (req, res) => {
     res.render('register', {
-        appName: process.env.APP_NAME, userInput: submission, currentPage: 'form', input: cleanSubmission, entries
+        appName: process.env.APP_NAME, currentPage: 'form'
 
     })
 });
@@ -31,3 +31,5 @@ auth.post('/logout', (req, res) => {
 auth.get('/account', (req, res) => {
     
 });
+
+module.exports = auth;
