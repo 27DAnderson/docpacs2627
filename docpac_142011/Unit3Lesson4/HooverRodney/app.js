@@ -7,6 +7,7 @@ const formRoutes = require('./routes/formRoutes.js');
 const parameterRoutes = require('./routes/parameterRoutes.js');
 const pageRoutes = require('./routes/pageRoutes.js');
 const sessionRoutes = require('./routes/sessionRoutes.js');
+const authRoutes = require('./routes/authRoutes.js');
 const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +33,7 @@ app.use(pageRoutes);
 app.use(formRoutes);
 app.use(parameterRoutes);
 app.use(sessionRoutes);
+app.use(authRoutes);
 
 //Not-found Handling
 app.use((req, res, next) => {
@@ -42,7 +44,7 @@ app.use((req, res, next) => {
     errorHeading: "Error 404",
     message: "The requested page does not exist! Please enter a valid URL or ",
     linkText: "return to the homepage",
-    linkURL: "/",
+    linkURL: "/"
   })
 });
 
