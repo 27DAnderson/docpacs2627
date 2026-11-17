@@ -29,6 +29,7 @@ app.use(require('./routes/formRoutes.js'));
 app.use(require('./routes/pageRoutes.js'));
 app.use(require('./routes/parameterRoutes.js'));
 app.use(require('./routes/sessionRoutes.js'));
+app.use(require('./routes/authRoutes.js'));
 
 app.all(('/*splat'), (req, res) => {
     res.status(404).render('error', { appName: process.env.APP_NAME, status: res.statusCode, statusInstr: 'PAGE NOT FOUND', currentPage: '' });
