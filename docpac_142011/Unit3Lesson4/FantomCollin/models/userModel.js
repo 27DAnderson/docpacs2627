@@ -1,14 +1,14 @@
 const db = require('./database');
 
-function findByUser(){
+function findByUser(username){
     return db.prepare(`SELECT * FROM users WHERE username = ?`).get(username);
 };
 
-function findByEmail(){
+function findByEmail(email){
     return db.prepare(`SELECT * FROM users WHERE email = ?`).get(email);
 };
 
-function findById(){
+function findById(id){
     return db.prepare(`SELECT * FROM users WHERE id = ?`).get(id);
 };
 
