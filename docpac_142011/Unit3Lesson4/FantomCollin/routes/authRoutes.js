@@ -6,7 +6,7 @@ const auth = express.Router();
 
 auth.get('/register', (req, res) => {
     res.render('register', {
-        appName: process.env.APP_NAME, currentPage: 'register'
+        appName: process.env.APP_NAME, currentPage: 'register', foundDupe: ''
     })
 });
 
@@ -15,18 +15,25 @@ auth.post('/register', (req, res) => {
     const email = req.body.emailSignup
     const password = req.body.passwordSignup
     const repPassword = req.body.repasswordSignup
-
-    if (username.trim() === '' || email.trim() === '' || password !== repPassword || username.trim()) {
+    console.log(username, email, password, repPassword);
+    
+    if (username.trim() === '' || email.trim() === '' || password !== repPassword) {
         return res.status(400).render('error', { appName: process.env.APP_NAME, status: res.statusCode, statusInstr: 'PLEASE ENTER A VALID USER/EMAIL OR PASSWORDS DO NOT MATCH, PLEASE TRY AGAIN', currentPage: 'register' })
     } else {
-        const userCheck = userModel.findByUser(username).trim()
-        const emailCheck = userModel.findByEmail(email).trim()
+        const userCheck = userModel.findByUser(username)
+        const emailCheck = userModel.findByEmail(email)
 
-        if (userCheck === username.trim() || emailCheck === email.trim()) {
+        console.log("uC", userCheck)
+        console.log("eC", emailCheck)
+
+        if (userModel.findByUser(username) === username || userModel.findByEmail(email) === email) {
             
             res.render('register', {
                 appName: process.env.APP_NAME, currentPage: 'register', foundDupe: 'Username/Email already exists!' 
             })
+        } else {
+            console.log('swows', username)
+            userModel.createUser(username, email, password)
         }
     }
 

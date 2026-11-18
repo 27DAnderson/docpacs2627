@@ -12,9 +12,11 @@ function findById(id){
     return db.prepare(`SELECT * FROM users WHERE id = ?`).get(id);
 };
 
-function createUser({username, email, password, displayName}){
-    const result = db.prepare(`INSERT INTO users (username, email, password, displayName) VALUES (?, ?, ?, ?)`)
-    .run(username, email, password, displayName);
+function createUser(username, email, password){
+    console.log('cU', username)
+
+    const result = db.prepare(`INSERT INTO users (username, email, password) VALUES (?, ?, ?)`)
+    .run(username, email, password);
     return result.lastInsertRowid;
 };
 
