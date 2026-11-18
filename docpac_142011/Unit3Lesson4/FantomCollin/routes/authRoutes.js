@@ -23,10 +23,7 @@ auth.post('/register', (req, res) => {
         const userCheck = userModel.findByUser(username)
         const emailCheck = userModel.findByEmail(email)
 
-        console.log("uC", userCheck)
-        console.log("eC", emailCheck)
-
-        if (userModel.findByUser(username) === username || userModel.findByEmail(email) === email) {
+        if (userCheck && userCheck.username === username || emailCheck && emailCheck.email === email) {
             
             res.render('register', {
                 appName: process.env.APP_NAME, currentPage: 'register', foundDupe: 'Username/Email already exists!' 
