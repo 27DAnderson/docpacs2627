@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
-
+const { isUhhAuthenticated } = require('../utils/sessionConfig.js')
 const root = express.Router();
 
-root.get('/', (req, res) => {
+root.get('/', isUhhAuthenticated, (req, res) => {
     res.render('index', { appName: process.env.APP_NAME, currentPage: 'home' });
 });
 

@@ -12,7 +12,7 @@ const sessionMiddleware = session({
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: function (req) {
         var match = req.url.match(/^\/([^/]+)/);
         return {
@@ -23,4 +23,13 @@ const sessionMiddleware = session({
         };
     }
 });
-module.exports = sessionMiddleware
+
+function isUhhAuthenticated(req, res, next){
+    if(req.session.userId){
+        next()
+    } else {
+        res.redirect('/login')
+    };
+};
+
+module.exports = { sessionMiddleware, isUhhAuthenticated }

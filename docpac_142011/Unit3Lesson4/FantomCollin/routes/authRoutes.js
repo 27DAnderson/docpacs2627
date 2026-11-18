@@ -37,7 +37,7 @@ auth.post('/register', (req, res) => {
 });
 
 auth.get('/login', (req, res) => {
-
+    res.render('login', { appName: process.env.APP_NAME, currentPage: 'login' })
 });
 
 auth.post('/login', (req, res) => {
