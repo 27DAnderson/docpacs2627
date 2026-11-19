@@ -1,6 +1,6 @@
 const db = require('../models/database.js');
 
-function createUser(username, email, password, is_active) {
+function createUser(username, email, password, is_active = 1) {
     const sql = `INSERT INTO users (username, email, password, is_active) VALUES (?, ?, ?, ?)`;
     const users = db.prepare(sql).run(username, email, password, is_active);
     return users;

@@ -3,6 +3,7 @@ let express = require('express');
 const path = require('path');
 const logRequest = require('./utils/requestLogger.js');
 const sessionConfig = require('./utils/sessionConfig.js')
+const authViewData = require('./utils/authViewData.js');
 const formRoutes = require('./routes/formRoutes.js');
 const parameterRoutes = require('./routes/parameterRoutes.js');
 const pageRoutes = require('./routes/pageRoutes.js');
@@ -27,6 +28,9 @@ app.use(express.urlencoded({ extended: true }));
 
 //Session Middleware
 app.use(sessionConfig);
+
+//Authentication Middleware
+app.use(authViewData);
 
 //Route Modules
 app.use(pageRoutes);
