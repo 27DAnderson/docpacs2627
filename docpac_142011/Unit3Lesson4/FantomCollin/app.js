@@ -9,10 +9,14 @@ const requestLogger = require('./utils/requestLogger.js');
 const init = require('./scripts/initDb.js');
 const { sessionMiddleware } = require('./utils/sessionConfig.js');
 
-
 app.use(sessionMiddleware);
 
 app.use(requestLogger);
+
+app.use((req, res, next) => {
+    res.locals.userId = req.session.userId || null;
+    next();
+})
 
 app.use(express.static('public'));
 

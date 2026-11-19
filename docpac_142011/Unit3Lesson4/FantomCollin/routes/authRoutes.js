@@ -15,7 +15,6 @@ auth.post('/register', (req, res) => {
     const email = req.body.emailSignup
     const password = req.body.passwordSignup
     const repPassword = req.body.repasswordSignup
-    console.log(username, email, password, repPassword);
 
     if (username.trim() === '' || email.trim() === '' || password !== repPassword) {
         return res.status(400).render('error', { appName: process.env.APP_NAME, status: res.statusCode, statusInstr: 'PLEASE ENTER A VALID USER/EMAIL OR PASSWORDS DO NOT MATCH, PLEASE TRY AGAIN', currentPage: 'register' })
@@ -61,7 +60,7 @@ auth.post('/login', (req, res) => {
                     console.error('Session save error:', err);
                     return res.status(500).send('Login error');
                 }
-                console.log('Session saved successfully! userId:', req.session.userId);
+
                 res.redirect('/account');
             });
         } else {
