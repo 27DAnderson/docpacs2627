@@ -13,15 +13,12 @@ const sessionMiddleware = session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: function (req) {
-        var match = req.url.match(/^\/([^/]+)/);
-        return {
-            path: match ? '/' + match[1] : '/',
-            httpOnly: true,
-            secure: process.env.USE_HTTPS === 'true' || false,
-            maxAge: 9999999999,
-        };
-    }
+    cookie: {
+    path: '/',
+    httpOnly: true,
+    secure: process.env.USE_HTTPS === 'true' || false,
+    maxAge: 9999999999,
+}
 });
 
 function isUhhAuthenticated(req, res, next){
